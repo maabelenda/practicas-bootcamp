@@ -1,7 +1,6 @@
 package meli.bootcamp.practicaspring.controllers;
 
 import meli.bootcamp.practicaspring.models.Morse;
-import meli.bootcamp.practicaspring.models.NumberModifier;
 import meli.bootcamp.practicaspring.services.MorseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
