@@ -1,33 +1,22 @@
 package meli.bootcamp.practicaspring.models;
 
+import com.google.gson.Gson;
 import lombok.Data;
 
 @Data
 public class Morse {
 
-    private static final String THREE_SPACES = "   ", SPACE = " ";
-
     private String morsePhrase;
+    private String decodePhrase;
 
-    public Morse(String morsePhrase) {
+    public Morse(String morsePhrase, String decodePhrase) {
         this.morsePhrase = morsePhrase;
+        this.decodePhrase = decodePhrase;
     }
 
-    public String translate() {
-        String [] listOfWords = this.morsePhrase.split(THREE_SPACES);
-
-
-        StringBuffer resp = new StringBuffer();
-
-        for(int i = 0 ; i < listOfWords.length ; i++) {
-            String [] list = listOfWords[i].split(SPACE);
-
-            for(int j = 0 ; j < list.length ; j++) {
-                MorseValue morseValue = MorseValue.getValue(list[j]);
-                resp.append(morseValue.getValue());
-            }
-            resp.append(SPACE);
-        }
-        return resp.toString();
+    @Override
+    public String toString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

@@ -2,6 +2,10 @@ package meli.bootcamp.practicaspring.controllers;
 
 import meli.bootcamp.practicaspring.models.Morse;
 import meli.bootcamp.practicaspring.models.NumberModifier;
+import meli.bootcamp.practicaspring.services.MorseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +20,13 @@ import javax.validation.constraints.Pattern;
 @Validated
 public class MorseController {
 
-    @GetMapping("/translate")
-    public String romanToDecimalNumber(//@Valid @Pattern(regexp = "^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")
-                                       @RequestParam(value="morseMessage") String morseMessage) {
+    @Autowired
+    MorseService morseService;
 
-        Morse morse = new Morse(morseMessage);
-        return morse.translate();
+    @GetMapping("/translate")
+    public ResponseEntity<Morse> romanToDecimalNumber(@Valid @Pattern(regexp = "^[.-]{1,5}(?> [.-]{1,5})*(?>   [.-]{1,5}(?> [.-]{1,5})*)*$")
+                                                      @RequestParam(value="morseMessage") String morseMessage) {
+
+        return new ResponseEntity<>(morseService.translate(morseMessage), HttpStatus.OK);
     }
 }
