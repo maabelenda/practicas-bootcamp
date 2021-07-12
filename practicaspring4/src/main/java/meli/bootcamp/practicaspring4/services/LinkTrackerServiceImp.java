@@ -7,7 +7,10 @@ import meli.bootcamp.practicaspring4.dtos.responses.LinkInvalidateResponseDTO;
 import meli.bootcamp.practicaspring4.dtos.responses.LinkMetricsResponseDTO;
 import meli.bootcamp.practicaspring4.exceptions.ApiException;
 import meli.bootcamp.practicaspring4.repositories.LinkTrackerRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +32,7 @@ public class LinkTrackerServiceImp implements LinkTrackerService {
     }
 
     @Override
-    public String getLink(Integer linkId, String password) {
+    public RedirectView getLink(Integer linkId, String password) {
 
         LinkDTO linkDTO = linkTrackerRepository.getLink(linkId);
 
@@ -44,7 +47,12 @@ public class LinkTrackerServiceImp implements LinkTrackerService {
         linkDTO.setCantRedirect(linkDTO.getCantRedirect()+1);
         linkTrackerRepository.updateLink(linkDTO);
 
-        return linkDTO.getUrl();
+        try {
+            return new RedirectView(linkDTO.getUrl());
+        } catch (MethodArgumentTypeMismatchException e) {
+            Map<String, String> errors = new HashMap<>();
+            throw new ApiException(HttpStatus.BAD_GATEWAY.value(), "El link ingresado no funciona", errors);
+        }
     }
 
     @Override
@@ -65,7 +73,7 @@ public class LinkTrackerServiceImp implements LinkTrackerService {
         linkDTO.setValid(false);
         linkTrackerRepository.updateLink(linkDTO);
 
-        return new LinkInvalidateResponseDTO();
+        return new LinkInvalidateResponseDTO(!linkDTO.isValid(),linkDTO.getLinkId());
     }
 
     private void validLinkDTO(LinkDTO linkDTO) {

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @RestController
 @RequestMapping("/link")
@@ -32,24 +33,24 @@ public class LinkTrackerController {
     }
 
     @GetMapping("/{linkId}")
-    public RedirectView redirect(@Valid @PathVariable
-                                                @NotNull(message = "El linkId no puede ser nulo") Integer linkId,
-                                            @RequestParam String password){
+    public RedirectView redirect(@PathVariable @NotNull(message = "El linkId no puede ser nulo")
+                                     @Pattern(regexp = "[0-9]+", message = "El linkId debe ser numerico") String linkId,
+                                            @RequestParam(required = false) String password){
 
-        return new RedirectView(linkTrackerService.getLink(linkId, password));
+        return linkTrackerService.getLink(Integer.valueOf(linkId), password);
     }
 
     @GetMapping("/metrics/{linkId}")
-    public ResponseEntity<LinkMetricsResponseDTO> getMetrics(@Valid @PathVariable
-                                                                          @NotNull(message = "El linkId no puede ser nulo") Integer linkId){
+    public ResponseEntity<LinkMetricsResponseDTO> getMetrics(@PathVariable @NotNull(message = "El linkId no puede ser nulo")
+                                                                 @Pattern(regexp = "[0-9]+") String linkId){
 
-        return new ResponseEntity<>(linkTrackerService.getMetrics(linkId), HttpStatus.OK);
+        return new ResponseEntity<>(linkTrackerService.getMetrics(Integer.valueOf(linkId)), HttpStatus.OK);
     }
 
     @PostMapping("/invalidate/{linkId}")
-    public ResponseEntity<LinkInvalidateResponseDTO> invalidateLink(@Valid @PathVariable
-                                                                                    @NotNull(message = "El linkId no puede ser nulo") Integer linkId){
+    public ResponseEntity<LinkInvalidateResponseDTO> invalidateLink(@PathVariable @NotNull(message = "El linkId no puede ser nulo")
+                                                                        @Pattern(regexp = "[0-9]+", message = "El linkId debe ser un numero entero") String linkId){
 
-        return new ResponseEntity<>(linkTrackerService.invalidateLink(linkId), HttpStatus.OK);
+        return new ResponseEntity<>(linkTrackerService.invalidateLink(Integer.valueOf(linkId)), HttpStatus.OK);
     }
 }

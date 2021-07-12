@@ -4,13 +4,14 @@ import meli.bootcamp.practicaspring4.dtos.requests.LinkRequestDTO;
 import meli.bootcamp.practicaspring4.dtos.responses.LinkIdResponseDTO;
 import meli.bootcamp.practicaspring4.dtos.responses.LinkInvalidateResponseDTO;
 import meli.bootcamp.practicaspring4.dtos.responses.LinkMetricsResponseDTO;
+import org.springframework.web.servlet.view.RedirectView;
 
 public interface LinkTrackerService {
 
 
     LinkIdResponseDTO createLink(LinkRequestDTO request);
 
-    String getLink(Integer linkId, String password);
+    RedirectView getLink(Integer linkId, String password);
 
     LinkMetricsResponseDTO getMetrics(Integer linkId);
 

@@ -6,5 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class LinkInvalidateResponseDTO {
-
+    private Boolean invalidate;
+    private Integer linkId;
 }
