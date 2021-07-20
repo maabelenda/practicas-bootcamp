@@ -1,11 +1,11 @@
-package meli.bootcamp.practicaspring2.exceptions;
+package com.socialmeli.exceptions;
 
 import lombok.Getter;
 
 import java.util.Map;
 
 @Getter
-public class ErrorMessage{
+public class ErrorMessage {
 
     private Integer status;
     private String error;

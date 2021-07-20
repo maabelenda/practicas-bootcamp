@@ -1,4 +1,4 @@
-package meli.bootcamp.practicaspring2.exceptions;
+package com.socialmeli.exceptions;
 
 import lombok.Data;
 

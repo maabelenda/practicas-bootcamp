@@ -1,6 +1,6 @@
 package meli.bootcamp.practicaspring2.handlers;
 
-import meli.bootcamp.practicaspring2.exceptions.ApiException;
+import meli.bootcamp.practicaspring2.exceptions.ObtenerDiplomaExceptionController;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,7 +22,7 @@ public class AgeHandler {
                 calendar.get(Calendar.YEAR) == iyear && calendar.get(Calendar.MONTH) == imonth && calendar.get(Calendar.DAY_OF_MONTH) < iday){
             Map<String, String> errors = new HashMap<>();
             errors.put("date", "invalid date");
-            throw new ApiException(400, "bad date", errors);
+            throw new ObtenerDiplomaExceptionController(400, "bad date", errors);
         }
 
     }

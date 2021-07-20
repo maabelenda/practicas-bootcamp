@@ -1,10 +1,10 @@
-package meli.bootcamp.practicaspring4;
+package com.socialmeli;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Practicaspring4ApplicationTests {
+class SocialmeliApplicationTests {
 
     @Test
     void contextLoads() {

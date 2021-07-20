@@ -1,4 +1,4 @@
-package meli.bootcamp.practicaspring2;
+package meli.bootcamp.practicaspring2.integrations;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

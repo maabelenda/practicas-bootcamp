@@ -54,15 +54,16 @@ public class LinkTrackerRepositoryImp implements LinkTrackerRepository {
 
         LinkDTO linkDTO = new LinkDTO(index.addAndGet(1), url, true, 0L, password);
         links.put(linkDTO.getLinkId(), linkDTO);
-        saveFile(new ArrayList<>(links.values()));
+        //saveFile(new ArrayList<>(links.values()));
         return linkDTO;
     }
 
     @Override
     public LinkDTO updateLink(LinkDTO linkDTO) {
         if(links.containsKey(linkDTO.getLinkId())) {
-            saveFile(new ArrayList<>(links.values()));
-            return links.put(linkDTO.getLinkId(), linkDTO);
+            //saveFile(new ArrayList<>(links.values()));
+            links.put(linkDTO.getLinkId(), linkDTO);
+            return links.get(linkDTO.getLinkId());
         }
 
         return null;
@@ -71,7 +72,7 @@ public class LinkTrackerRepositoryImp implements LinkTrackerRepository {
     private void saveFile(List<LinkDTO> linkDTO) {
         ObjectMapper objectMapper = new ObjectMapper();
         try{
-            objectMapper.writeValue(ResourceUtils.getFile("classpath:static/links.json"), linkDTO);
+            objectMapper.writeValue(ResourceUtils.getFile("classpath:links.json"), linkDTO);
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -80,7 +81,7 @@ public class LinkTrackerRepositoryImp implements LinkTrackerRepository {
     private static List<LinkDTO> loadDatabase(){
         File file = null;
         try{
-            file = ResourceUtils.getFile("classpath:static/links.json");
+            file = ResourceUtils.getFile("classpath:links.json");
         }catch (FileNotFoundException e){
             //e.printStackTrace();
         }
@@ -91,14 +92,14 @@ public class LinkTrackerRepositoryImp implements LinkTrackerRepository {
     private static List<LinkDTO> mapObject(File file){
         ObjectMapper objectMapper = new ObjectMapper();
         TypeReference<List<LinkDTO>> typeReference = new TypeReference<>(){};
-        List<LinkDTO> priceDTOS = null;
+        List<LinkDTO> linkDTOS = null;
         try {
-            priceDTOS = objectMapper.readValue(file, typeReference);
+            linkDTOS = objectMapper.readValue(file, typeReference);
         }catch (IOException e){
             //e.printStackTrace();
         }
 
-        return priceDTOS;
+        return linkDTOS;
     }
 
 }

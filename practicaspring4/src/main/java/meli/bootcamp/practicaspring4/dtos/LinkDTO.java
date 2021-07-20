@@ -11,7 +11,7 @@ public class LinkDTO {
 
     private Integer linkId;
     private String url;
-    private boolean isValid;
+    private Boolean isValid;
     private Long cantRedirect;
     private String password;
 }

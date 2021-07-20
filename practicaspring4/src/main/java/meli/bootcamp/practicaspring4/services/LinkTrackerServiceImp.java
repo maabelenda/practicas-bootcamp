@@ -70,10 +70,10 @@ public class LinkTrackerServiceImp implements LinkTrackerService {
 
         validLinkDTO(linkDTO);
 
-        linkDTO.setValid(false);
+        linkDTO.setIsValid(false);
         linkTrackerRepository.updateLink(linkDTO);
 
-        return new LinkInvalidateResponseDTO(!linkDTO.isValid(),linkDTO.getLinkId());
+        return new LinkInvalidateResponseDTO(!linkDTO.getIsValid(),linkDTO.getLinkId());
     }
 
     private void validLinkDTO(LinkDTO linkDTO) {
@@ -83,7 +83,7 @@ public class LinkTrackerServiceImp implements LinkTrackerService {
             throw new ApiException(404, "not found", errors);
         }
 
-        if(!linkDTO.isValid()) {
+        if(!linkDTO.getIsValid()) {
             Map<String, String> errors = new HashMap<>();
             errors.put("linkId", "linkId is invalidated");
             throw new ApiException(400, "invalid link", errors);

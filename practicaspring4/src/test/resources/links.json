@@ -1,0 +1,30 @@
+[
+  {
+    "linkId": 1,
+    "url": "https://google.com",
+    "isValid": true,
+    "cantRedirect": 2,
+    "password": null
+  },
+  {
+    "linkId": 2,
+    "url": "https://facebook.com",
+    "isValid": true,
+    "cantRedirect": 0,
+    "password": "pepe"
+  },
+  {
+    "linkId": 3,
+    "url": "https://twitter.com",
+    "isValid": true,
+    "cantRedirect": 15,
+    "password": null
+  },
+  {
+    "linkId": 4,
+    "url": "https://twitter.com",
+    "isValid": true,
+    "cantRedirect": 15,
+    "password": null
+  }
+]

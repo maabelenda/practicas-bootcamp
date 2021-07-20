@@ -1,6 +1,7 @@
 package meli.bootcamp.practicaspring2.controllers;
 
 import meli.bootcamp.practicaspring2.dtos.response.AgeDto;
+import meli.bootcamp.practicaspring2.exceptions.ObtenerDiplomaExceptionController;
 import meli.bootcamp.practicaspring2.handlers.AgeHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
