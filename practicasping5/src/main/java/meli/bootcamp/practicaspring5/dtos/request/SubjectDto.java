@@ -1,4 +1,4 @@
-package meli.bootcamp.practicaspring2.dtos.request;
+package meli.bootcamp.practicaspring5.dtos.request;
 
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;

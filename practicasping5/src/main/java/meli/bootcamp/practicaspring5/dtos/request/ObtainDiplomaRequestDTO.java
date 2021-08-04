@@ -1,15 +1,18 @@
-package meli.bootcamp.practicaspring2.dtos.request;
+package meli.bootcamp.practicaspring5.dtos.request;
 
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 
 @Data
 @Validated
-public class StudentRequestDto{
+public class ObtainDiplomaRequestDTO {
 
 
     @NotBlank(message = "El nombre del alumno no puede estar vacío.")
